@@ -17,7 +17,7 @@ const region = args[1];
 const server = region == "eu" ? "eu.stray.gg" : "stray.gg";
 const server_port = 25565;
 
-const chat_enabled = true;
+const chat_enabled = false;
 var logged_in = false;
 
 // Config
