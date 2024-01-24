@@ -6,9 +6,9 @@ const fs = require('fs');
 // Constants
 const args = process.argv.slice(2);
 
-if (args.length != 2) {
-    console.log("Usage: node index.js <username> <region>");
-    console.log("Example: node index.js YourAccount123 eu");
+if (args.length != 3) {
+    console.log("Usage: node index.js <username> <region> [chat_monitoring]");
+    console.log("Example: node index.js YourAccount123 eu true");
     process.exit(1);
 }
 
@@ -16,8 +16,8 @@ const username = args[0];
 const region = args[1];
 const server = region == "eu" ? "eu.stray.gg" : "stray.gg";
 const server_port = 25565;
+const chat_monitoring = args[2].toLowerCase() == "true" ? true : false;
 
-const chat_enabled = false;
 var logged_in = false;
 
 // Config
@@ -39,28 +39,35 @@ const bots = [
 ];
 
 bots.forEach(bot => {
+
     bot.once('spawn', () => {
         console.log("Logged in as " + bot.username + "!")
     });
+
     bot.on('spawn', () => {
+
         if (logged_in) {
             sendWebhook(wh_login, bot.username + " joined TridentBox.");
         } else {
             logged_in = true;
         }
+
         bot.chat("/server tridentbox");
-        // wait 1 second
         setTimeout(() => {
             bot.chat("/afk");
         }, 1000);
+
     });
+
     bot.on('kicked', (reason) => {
         console.log(reason);
         process.exit(1);
     });
+
     bot.on('error', (err) => {
         console.log(err);
     });
+
     bot.on('messagestr', (message, messagePosition, jsonMsg, sender, verified) => {
 
         // Whole bunch of horrible message parsing - I'm sorry
@@ -83,6 +90,7 @@ bots.forEach(bot => {
         }
 
     });
+
 });
 
 // Cron Config
