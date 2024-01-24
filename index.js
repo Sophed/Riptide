@@ -85,7 +85,7 @@ bots.forEach(bot => {
         } else if (message == "The arena has reset!") {
             sendWebhook(wh_alerts, "The arena has reset.");
 
-        } else if (chat_enabled) {
+        } else if (chat_monitoring) {
             sendWebhook(wh_chat, message);
         }
 
