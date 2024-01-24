@@ -1,5 +1,10 @@
 const axios = require('axios');
 
+function getTimeStamp() {
+    var date = new Date();
+    return "[" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "] ";
+}
+
 function template(msg) {
     return {
         "content": null,
@@ -30,7 +35,7 @@ function sendWebhook(url, msg) {
 
     axios.post(url, template(msg))
         .then(function (response) {
-            console.log(msg);
+            console.log(getTimeStamp + msg);
         })
         .catch(function (error) {
             console.log(error);
@@ -42,7 +47,7 @@ function sendRawWebhook(url, msg) {
 
     axios.post(url, rawTemplate(msg))
         .then(function (response) {
-            console.log(msg);
+            console.log(getTimeStamp + msg);
         })
         .catch(function (error) {
             console.log(error);
