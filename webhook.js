@@ -35,7 +35,7 @@ function sendWebhook(url, msg) {
 
     axios.post(url, template(msg))
         .then(function (response) {
-            console.log(getTimeStamp + msg);
+            console.log(getTimeStamp() + msg);
         })
         .catch(function (error) {
             console.log(error);
@@ -47,7 +47,7 @@ function sendRawWebhook(url, msg) {
 
     axios.post(url, rawTemplate(msg))
         .then(function (response) {
-            console.log(getTimeStamp + msg);
+            console.log(getTimeStamp() + msg);
         })
         .catch(function (error) {
             console.log(error);
