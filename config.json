@@ -1,4 +1,6 @@
 {
+    "plot": 0,
+    "webhook_deposit": "",
     "webhook_chat": "",
     "webhook_afk": "",
     "webhook_daily": "",
